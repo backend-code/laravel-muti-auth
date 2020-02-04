@@ -17,41 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout');
+Route::post('register', 'Auth\RegisterController@register');
 
-Route::get('/verified-only', function(Request $request){
-
-    dd('your are verified', $request->user()->name);
-})->middleware('auth:api','verified');
-
-Route::post('/register', 'API\AuthController@register');
-Route::post('/login', 'API\AuthController@login');
-
-Route::post('/reset-link-email', 'API\ForgotPasswordController@sendResetLinkEmail');
-Route::post('/reset-password', 'API\ResetPasswordController@reset');
-
-
-Route::get('/resend-email', 'API\VerificationController@resend')->name('verification.resend');
-
-Route::get('/verify-email/{id}/{hash}', 'API\VerificationController@verify')->name('verification.verify');
-
-Route::apiResource('tasks','API\TasksController')->middleware('auth:api');
-
-
-// Route::get('/verified-only', function(Request $request){
-
-//     dd('your are verified', $request->user()->name);
-// })->middleware('auth:api','verified');
-
-
-// Route::post('/register', 'API\AuthController@register');
-// Route::post('/login', 'API\AuthController@login');
-
-// Route::post('/password/email', 'API\ForgotPasswordController@sendResetLinkEmail');
-// Route::post('/password/reset', 'API\ResetPasswordController@reset');
-
-
-// Route::get('/email/resend', 'API\VerificationController@resend')->name('verification.resend');
-
-// Route::get('/email/verify/{id}/{hash}', 'API\VerificationController@verify')->name('verification.verify');
-
-// Route::apiResource('tasks','API\TasksController')->middleware('auth:api');
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::get('articles', 'ArticleController@index');
+    Route::get('articles/{article}', 'ArticleController@show');
+    Route::post('articles', 'ArticleController@store');
+    Route::put('articles/{article}', 'ArticleController@update');
+    Route::delete('articles/{article}', 'ArticleController@delete');
+});
