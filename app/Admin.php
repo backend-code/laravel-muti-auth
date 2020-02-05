@@ -2,19 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-
-class User extends Authenticatable
- {
-    use Notifiable;
-
-    /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
+class Admin extends Model
+{
     protected $fillable = [
         'first_name', 'last_name','token_type', 'email', 'password','password_confirmation'
     ];

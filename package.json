@@ -2,8 +2,10 @@
     "private": true,
     "scripts": {
         "start": "npm run dev && php artisan serve",
+        "make-class-in-app": "php atisan make: -m",
         "sd": "php artisan migrate",
         "i-key": "php artisan passport:install",
+        "test": "composer test",
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "npm run development -- --watch",

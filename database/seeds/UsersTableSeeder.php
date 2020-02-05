@@ -4,14 +4,15 @@ use App\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
-{
+ {
     /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+    * Run the database seeds.
+    *
+    * @return void
+    */
+
     public function run()
-    {
+ {
         // Let's clear the users table first
         User::truncate();
 
@@ -23,20 +24,24 @@ class UsersTableSeeder extends Seeder
         $password = Hash::make('toptal');
 
         User::create([
-            'name' => $faker->name,
-            'root' => $faker->root,
+            'first_name' =>  $faker->first_name,
+            'last_name' =>  $faker->last_name,
+            'token_type' =>  $faker->token_type,
             'email' => $faker->email,
             'password' => $password,
+            'password_confirmation' => $faker->password_confirmation,
         ]);
 
         // And now let's generate a few dozen users for our app:
-        for ($i = 0; $i < 10; $i++) {
-            User::create([
-                'name' => $faker->name,
-                'root' => $faker->root,
+        for ( $i = 0; $i < 10; $i++ ) {
+            User::create( [
+                'first_name' =>  $faker->first_name,
+                'last_name' =>  $faker->last_name,
+                'token_type' =>  $faker->token_type,
                 'email' => $faker->email,
                 'password' => $password,
-            ]);
+                'password_confirmation' => $faker->password_confirmation,
+            ] );
         }
     }
 }

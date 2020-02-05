@@ -17,9 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout');
-Route::post('register', 'Auth\RegisterController@register');
+Route::post('login', 'API\UserController@login');
+Route::post('logout', 'API\UserController@logout');
+Route::post('register', 'API\UserController@register');
+
+Route::post('admin/login', 'API\AdminController@login');
+Route::post('admin/logout', 'API\AdminController@logout');
+Route::post('admin/register', 'API\AdminController@register');
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::get('articles', 'ArticleController@index');
